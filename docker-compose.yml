@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres
+    container_name: database
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: login
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/pgdata:/var/lib/postgresql/data
+    networks:
+      - local
+
+  microservice:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    image: login-microservice
+    container_name: microservice
+    ports:
+      - 4000:4000
+    networks:
+      - local
+    depends_on:
+      - postgres
+
+networks:
+  local:
+    driver: bridge
