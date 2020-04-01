@@ -11,22 +11,18 @@ services:
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./database/pgdata:/var/lib/postgresql/data
-    networks:
-      - local
+    expose:
+      - 5432
 
   microservice:
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./microservice/Dockerfile
       context: .
     image: login-microservice
     container_name: microservice
+    volumes:
+      - .:/project/login
     ports:
       - 4000:4000
-    networks:
-      - local
     depends_on:
       - postgres
-
-networks:
-  local:
-    driver: bridge
