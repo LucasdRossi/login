@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(
   cookieSession({
-    keys: ["aiJsdij1098jdjs901928djaASd93"] // random string
+    keys: ["aiJsdij1098jdjs901928djaASd93"], // random string
   })
 );
 

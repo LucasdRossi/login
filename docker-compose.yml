@@ -16,15 +16,15 @@ services:
     ports:
       - 5432:5432
 
-  microservice:
-    build:
-      dockerfile: ./microservice/Dockerfile
-      context: .
-    image: login-microservice
-    container_name: microservice
-    volumes:
-      - .:/project/login
-    ports:
-      - 4000:4000
-    depends_on:
-      - postgres
+  # microservice:
+  #   build:
+  #     dockerfile: ./microservice/Dockerfile
+  #     context: .
+  #   image: login-microservice
+  #   container_name: microservice
+  #   volumes:
+  #     - .:/project/login
+  #   ports:
+  #     - 4000:4000
+  #   depends_on:
+  #     - postgres
