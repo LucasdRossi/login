@@ -9,4 +9,18 @@ class RequestError extends Error {
 
 module.exports = {
   RequestError,
+  makeParams(attrs) {
+    const keys = Object.keys(attrs);
+    const params = [];
+    const values = [];
+    let cont = 1;
+
+    for (let key of keys) {
+      params.push(`${key} = $${cont}`);
+      values.push(attrs[key]);
+      cont += 1;
+    }
+
+    return [params, values];
+  },
 };
