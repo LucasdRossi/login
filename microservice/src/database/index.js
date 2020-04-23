@@ -42,11 +42,8 @@ module.exports = class Auth {
 
     console.log("=> LOG: sending query");
     console.log(query);
-    const result = await this.db.query(query);
-    console.log(`=> LOG: receiving data from query "${name}"`);
-    console.log(result);
-
-    return true;
+    await this.db.query(query);
+    console.log(`=> LOG: query "${name}" successfully executed`);
   }
 
   async getByAttrs(attrs = {}) {
@@ -60,10 +57,20 @@ module.exports = class Auth {
 
     console.log("=> LOG: sending query");
     console.log(query);
-    const { rows } = await this.db.query(query);
+    let { rows } = await this.db.query(query);
     console.log(`=> LOG: receiving data from query "${name}"`);
+    rows = rows[0];
     console.log(rows);
 
     return rows;
+  }
+
+  comparePassword(attempt, password) {
+    const [hashed, salt] = password.split(".");
+
+    let hashedAttempt = crypto.scryptSync(attempt, salt, 64); // buffer
+    hashedAttempt = hashedAttempt.toString("hex");
+
+    return hashed === hashedAttempt;
   }
 };

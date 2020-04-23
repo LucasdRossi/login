@@ -17,4 +17,11 @@ module.exports = {
       );
     }
   },
+  requireAuth(req, res, next) {
+    if (!req.session.userId) {
+      res.status(401).json({ error: "User is not logged in" });
+    } else {
+      next();
+    }
+  },
 };
