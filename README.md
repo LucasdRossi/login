@@ -1,4 +1,4 @@
-# Login
+# Login :octopus:
 
 To start the service, simply run
 

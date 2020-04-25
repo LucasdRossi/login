@@ -1,4 +1,4 @@
-# Database
+# Database :elephant:
 
 The database have a single table called `users`
 
