@@ -1,7 +1,7 @@
 const express = require("express");
 const Auth = require("../database");
 
-const { checkBody, requireAuth } = require("./middlewares");
+const { checkBody, requireAuth } = require("./middleware");
 const { RequestError } = require("../helpers");
 
 const router = express.Router();
@@ -29,7 +29,13 @@ router.post("/signup", async (req, res) => {
     await auth.create({ username, password });
     console.log(`=> LOG: ${username} registered`);
 
-    return res.status(201).json({ success: `${username} is now registered` });
+    const user = await auth.getByAttrs({ username });
+
+    req.session.userId = user.id;
+
+    return res
+      .status(201)
+      .json({ success: `${username} is now registered`, user });
   } catch (error) {
     console.log(`=> ERROR: ${error.message}`);
     if (error instanceof RequestError) {
@@ -83,7 +89,30 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/logout", requireAuth, (req, res) => {
+  req.session.userId = null;
   res.status(200).json({ success: "Logged out" });
 });
 
+router.delete("/delete", requireAuth, async (req, res) => {
+  const auth = new Auth();
+  try {
+    const { userId } = req.session;
+
+    await auth.connect();
+
+    await auth.delete(parseInt(userId));
+
+    req.session.userId = null;
+    return res.status(200).json({ success: `User with id ${userId} deleted` });
+  } catch (error) {
+    console.log(`=> ERROR: ${error.message}`);
+    if (error instanceof RequestError) {
+      res.status(error.status).json({ error: error.message });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
+  } finally {
+    await auth.disconnet();
+  }
+});
 module.exports = router;

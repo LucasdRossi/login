@@ -14,7 +14,7 @@ module.exports = class Auth {
     try {
       await this.db.connect();
     } catch (err) {
-      throw new Error("Error conecting to the database");
+      throw new Error("Error connecting to the database");
     }
   }
 
@@ -25,6 +25,19 @@ module.exports = class Auth {
     } catch (err) {
       throw new Error("Error disconnecting from the database");
     }
+  }
+
+  async delete(id) {
+    const name = "delete-user";
+    const text = "DELETE FROM users WHERE id = $1";
+    const values = [id];
+
+    const query = { name, text, values };
+
+    console.log("=> LOG: sending query");
+    console.log(query);
+    await this.db.query(query);
+    console.log(`=> LOG: query "${name}" successfully executed`);
   }
 
   async create(user) {

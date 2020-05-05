@@ -11,9 +11,9 @@ Passwords will be encrypted with the `sha256` method
 ```json
 // POST
 {
-  "username": "username",
-  "password": "password",
-  "confirmation": "password"
+  "username": "Mckenzie Carroll",
+  "password": "Kansas",
+  "confirmation": "Kansas"
 }
 ```
 
@@ -22,8 +22,8 @@ Passwords will be encrypted with the `sha256` method
 ```json
 // GET
 {
-  "username": "username",
-  "password": "password"
+  "username": "Mckenzie Carroll",
+  "password": "Kansas"
 }
 ```
 
@@ -31,6 +31,12 @@ Passwords will be encrypted with the `sha256` method
 
 ```json
 // GET
+```
+
+### /delete
+
+```json
+// DELETE
 ```
 
 ## Responses
