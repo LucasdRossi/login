@@ -33,9 +33,7 @@ router.post("/signup", async (req, res) => {
 
     req.session.userId = user.id;
 
-    return res
-      .status(201)
-      .json({ success: `${username} is now registered`, user });
+    return res.status(201).json({ success: `${username} is now registered` });
   } catch (error) {
     console.log(`=> ERROR: ${error.message}`);
     if (error instanceof RequestError) {
@@ -55,9 +53,9 @@ router.get("/login", async (req, res) => {
       throw new RequestError(400, `User is already logged in`);
     }
 
-    checkBody(req.body, ["username", "attempt"]);
+    checkBody(req.body, ["username", "password"]);
 
-    let { username, attempt } = req.body;
+    let { username, password } = req.body;
     username = username[0].toUpperCase() + username.substring(1);
 
     await auth.connect();
@@ -68,7 +66,7 @@ router.get("/login", async (req, res) => {
       throw new RequestError(404, `Username ${username} is not registered`);
     }
 
-    const correct = auth.comparePassword(attempt, user.password);
+    const correct = auth.comparePassword(password, user.password);
 
     if (!correct) {
       throw new RequestError(400, `Incorrect password`);

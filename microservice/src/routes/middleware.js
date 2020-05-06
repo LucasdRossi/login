@@ -1,4 +1,5 @@
 const { RequestError } = require("../helpers");
+const Auth = require("../database");
 
 module.exports = {
   checkBody(body, expected) {
@@ -17,11 +18,32 @@ module.exports = {
       );
     }
   },
-  requireAuth(req, res, next) {
+  async requireAuth(req, res, next) {
     if (!req.session.userId) {
       res.status(401).json({ error: "User is not logged in" });
     } else {
-      next();
+      const auth = new Auth();
+      const { userId: id } = req.session;
+      try {
+        await auth.connect();
+
+        const exist = await auth.getByAttrs({ id });
+
+        if (!exist) {
+          throw new RequestError(404, `Cannot find user`);
+        }
+
+        next();
+      } catch (error) {
+        console.log(`=> ERROR: ${error.message}`);
+        if (error instanceof RequestError) {
+          res.status(error.status).json({ error: error.message });
+        } else {
+          res.status(500).json({ error: error.message });
+        }
+      } finally {
+        await auth.disconnet();
+      }
     }
   },
 };

@@ -24,7 +24,7 @@ describe("signup, logout, login, delete", () => {
   it("should login the user", async () => {
     const res = await request(app).get("/login").send({
       username: "Malika",
-      attempt: "Utah",
+      password: "Utah",
     });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("success");
