@@ -1,7 +1,3 @@
-# Login :octopus:
+# Login :key:
 
-To start the service, simply run
 
-```bash
-docker-compose up
-```
