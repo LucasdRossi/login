@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 
 // STYLES
-import { Wrapper, Link, LinkWrapper, Button } from "./auth.style";
+import { Wrapper, Link, LinkWrapper } from "./auth.style";
+
+// FORM
+
+import { AuthForm } from "../Forms";
 
 const Auth = (props) => {
+  const [mode, setMode] = useState("login");
+
   const { onLogin } = props;
 
-  const [mode, setMode] = useState("login"); // false -> login | true -> signup
+  const onSubmit = (values) => {
+    console.log(values);
+  };
 
   const toggleMode = (newMode) => {
     if (mode !== newMode) {
@@ -24,8 +32,7 @@ const Auth = (props) => {
           SIGN UP
         </Link>
       </LinkWrapper>
-      <div>Form</div>
-      <Button>{mode === "login" ? "LOG IN" : "SIGN UP"}</Button>
+      <AuthForm type={mode} onSubmit={onSubmit} />
     </Wrapper>
   );
 };

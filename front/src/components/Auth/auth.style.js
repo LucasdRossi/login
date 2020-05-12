@@ -22,17 +22,3 @@ export const LinkWrapper = styled.div`
   width: 80%;
   justify-content: space-evenly;
 `;
-
-export const Button = styled.button`
-  width: 150px;
-  height: 40px;
-  font-size: 1.1rem;
-  background-color: #a2a3bb !important;
-  color: #fff;
-  border: 2px solid #9394aa;
-  box-sizing: border-box;
-  font-weight: bold;
-  &:hover {
-    background-color: #babbd4 !important;
-  }
-`;
