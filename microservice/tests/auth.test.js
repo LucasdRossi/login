@@ -22,7 +22,7 @@ describe("signup, logout, login, delete", () => {
   });
 
   it("should login the user", async () => {
-    const res = await request(app).get("/login").send({
+    const res = await request(app).post("/login").send({
       username: "Malika",
       password: "Utah",
     });

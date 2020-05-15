@@ -20,7 +20,7 @@ Passwords will be encrypted with the `sha256` method
 ### /login
 
 ```json
-// GET
+// POST
 {
   "username": "Mckenzie Carroll",
   "password": "Kansas"

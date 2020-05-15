@@ -19,7 +19,7 @@ afterAll(async () => {
 describe("login validations", () => {
   it("already logged in", async () => {
     const res = await request(app)
-      .get("/login")
+      .post("/login")
       .send({
         username: "Hilbert",
         password: "strategize",
@@ -31,7 +31,7 @@ describe("login validations", () => {
   });
 
   it("wrong password", async () => {
-    const res = await request(app).get("/login").send({
+    const res = await request(app).post("/login").send({
       username: "Hilbert",
       password: "strategize123",
     });
@@ -41,7 +41,7 @@ describe("login validations", () => {
   });
 
   it("username not registered", async () => {
-    const res = await request(app).get("/login").send({
+    const res = await request(app).post("/login").send({
       username: "Alysson",
       password: "strategize",
     });

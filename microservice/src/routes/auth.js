@@ -32,8 +32,11 @@ router.post("/signup", async (req, res) => {
     const user = await auth.getByAttrs({ username });
 
     req.session.userId = user.id;
+    delete user.password;
 
-    return res.status(201).json({ success: `${username} is now registered` });
+    return res
+      .status(201)
+      .json({ success: `${username} is now registered`, user });
   } catch (error) {
     console.log(`=> ERROR: ${error.message}`);
     if (error instanceof RequestError) {
@@ -46,7 +49,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   const auth = new Auth();
   try {
     if (req.session.userId) {
@@ -73,7 +76,9 @@ router.get("/login", async (req, res) => {
     }
 
     req.session.userId = user.id;
-    return res.status(200).json({ success: `Correct password` });
+    delete user.password;
+
+    return res.status(200).json({ success: `Correct password`, user });
   } catch (error) {
     console.log(`=> ERROR: ${error.message}`);
     if (error instanceof RequestError) {

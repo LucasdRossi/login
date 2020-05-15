@@ -30,6 +30,7 @@ module.exports = {
         const exist = await auth.getByAttrs({ id });
 
         if (!exist) {
+          req.session.userId = null;
           throw new RequestError(404, `Cannot find user`);
         }
 
