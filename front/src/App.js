@@ -9,6 +9,14 @@ import Auth from "./components/Auth";
 
 const App = () => {
   const [user, setUser] = useState({});
+
+  const onLogin = (user) => {
+    console.log("user", user);
+    setUser(user);
+  };
+
+  const onError = (message) => {};
+
   return (
     <div
       style={{
@@ -20,7 +28,7 @@ const App = () => {
     >
       <Panel>
         <img src={Image} height="100%" />
-        <Auth onLogin={setUser} />
+        <Auth onLogin={onLogin} onError={onError} />
       </Panel>
     </div>
   );

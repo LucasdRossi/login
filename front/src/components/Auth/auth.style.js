@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { Keyframes } from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ export const Link = styled.p`
   font-weight: 500;
   font-size: 1.5rem;
   color: ${(props) => (props.active ? "#000000" : "#B0B0B5")};
-  text-decoration-line: ${(props) => (props.active ? "underline" : "none")};
+  border-bottom: ${(props) => (props.active ? "2px solid #000000" : "none")};
   cursor: pointer;
 `;
 

@@ -1,19 +1,24 @@
 import React, { useState } from "react";
+import microservice from "../../configs/microservice";
 
 // STYLES
 import { Wrapper, Link, LinkWrapper } from "./auth.style";
 
 // FORM
-
 import { AuthForm } from "../Forms";
 
 const Auth = (props) => {
-  const [mode, setMode] = useState("login");
+  const [mode, setMode] = useState("login"); // login || signup
 
-  const { onLogin } = props;
+  const { onLogin, onError } = props;
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const [status, response] = await microservice("post", `/${mode}`, values);
+    if (status === "error") {
+      onError(response);
+    } else {
+      onLogin(response.user);
+    }
   };
 
   const toggleMode = (newMode) => {
@@ -32,7 +37,7 @@ const Auth = (props) => {
           SIGN UP
         </Link>
       </LinkWrapper>
-      <AuthForm type={mode} onSubmit={onSubmit} />
+      <AuthForm mode={mode} onSubmit={onSubmit} />
     </Wrapper>
   );
 };
