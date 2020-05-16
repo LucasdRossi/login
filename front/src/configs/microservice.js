@@ -11,6 +11,6 @@ export default async function (method, route, data) {
     });
     return ["ok", response.data];
   } catch ({ response }) {
-    return ["error", response.data.error];
+    return ["error", response.data];
   }
 }

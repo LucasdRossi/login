@@ -10,15 +10,20 @@ import { AuthForm } from "../Forms";
 const Auth = (props) => {
   const [mode, setMode] = useState("login"); // login || signup
 
-  const { onLogin, onError } = props;
+  const { onLogin, dropCard } = props;
 
   const onSubmit = async (values) => {
+    if (mode === "login" && values.confirmation) {
+      delete values.confirmation;
+    }
+
     const [status, response] = await microservice("post", `/${mode}`, values);
-    if (status === "error") {
-      onError(response);
-    } else {
+    if (status === "ok") {
       onLogin(response.user);
     }
+    const message = response.error || response.success;
+
+    dropCard(status, message);
   };
 
   const toggleMode = (newMode) => {

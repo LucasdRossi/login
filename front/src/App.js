@@ -6,16 +6,20 @@ import Image from "./images/login-image.png";
 // COMPONENTS
 import Panel from "./components/Panel";
 import Auth from "./components/Auth";
+import DropCard from "./components/DropCard";
 
 const App = () => {
   const [user, setUser] = useState({});
+  const [dropCard, setDropCard] = useState({ active: false });
 
   const onLogin = (user) => {
     console.log("user", user);
     setUser(user);
   };
 
-  const onError = (message) => {};
+  const handleDropCard = (type, message) => {
+    setDropCard({ active: true, type, message });
+  };
 
   return (
     <div
@@ -26,9 +30,16 @@ const App = () => {
         height: "100%",
       }}
     >
+      {dropCard.active && (
+        <DropCard
+          message={dropCard.message}
+          type={dropCard.type}
+          setDropCard={setDropCard}
+        />
+      )}
       <Panel>
         <img src={Image} height="100%" />
-        <Auth onLogin={onLogin} onError={onError} />
+        <Auth onLogin={onLogin} dropCard={handleDropCard} />
       </Panel>
     </div>
   );
