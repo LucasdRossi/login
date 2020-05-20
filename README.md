@@ -29,4 +29,4 @@ $ cd login
 $ docker-compose up -d
 ```
 
-Then go to [localhost:3000](http://localhost:3000/){:target="_blank"}
+Then go to <a href="http:/localhost:3000/" target="_blank">localhost:3000</a>
