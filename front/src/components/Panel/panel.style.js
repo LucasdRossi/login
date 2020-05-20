@@ -7,4 +7,5 @@ export const Wrapper = styled.div`
   margin-top: 13vh;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   display: flex;
+  justify-content: center;
 `;
