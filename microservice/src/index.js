@@ -7,12 +7,15 @@ const authRouter = require("./routes/auth");
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(
   cookieSession({
-    keys: ["aiJsdij1098jdjs901928djaASd93"], // random string
+    name: "session",
+    keys: ["aiudshaiushd"],
+
+    httpOnly:false
   })
 );
+app.use(express.json());
 
 app.use(authRouter);
 

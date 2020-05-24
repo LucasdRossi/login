@@ -2,6 +2,8 @@
 
 > A simple login system
 
+## :tv: Demo
+
 ## :rocket: Technologies
 
 - [ReactJs](https://reactjs.org/)
@@ -29,4 +31,11 @@ $ cd login
 $ docker-compose up -d
 ```
 
-Then go to <a href="http:/localhost:3000/" target="_blank">localhost:3000</a>
+Then go to [localhost:3000](http://localhost:3000)
+
+## :pencil: Improvements
+
+- [ ] Login with other systems like github or google
+- [ ] Animations
+- [ ] Change password
+- [ ] Profile page

@@ -12,6 +12,7 @@ describe("signup, logout, login, delete", () => {
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty("success");
     cookie = res.headers["set-cookie"];
+    console.log("=>>>>> cookie", cookie);
   });
 
   it("should logout the user", async () => {

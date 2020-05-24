@@ -2,4 +2,4 @@ FROM node
 
 WORKDIR /project/login/microservice
 
-CMD npm install && npm run start
+CMD npm install && npm run dev

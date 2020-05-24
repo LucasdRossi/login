@@ -23,11 +23,11 @@ module.exports = {
       res.status(401).json({ error: "User is not logged in" });
     } else {
       const auth = new Auth();
-      const { userId: id } = req.session;
+      const { userId } = req.session;
       try {
         await auth.connect();
 
-        const exist = await auth.getByAttrs({ id });
+        const exist = await auth.getByAttrs({ id: parseInt(userId) });
 
         if (!exist) {
           req.session.userId = null;

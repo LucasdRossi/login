@@ -9,6 +9,7 @@ export default async function (method, route, data = {}) {
       method,
       data,
     });
+    console.log(response);
     return ["ok", response.data];
   } catch ({ response }) {
     return ["error", response.data];

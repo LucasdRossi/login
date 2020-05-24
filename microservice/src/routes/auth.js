@@ -31,7 +31,7 @@ router.post("/signup", async (req, res) => {
 
     const user = await auth.getByAttrs({ username });
 
-    req.session.userId = user.id;
+    req.session.userId = user.id.toString();
     delete user.password;
 
     return res
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
       throw new RequestError(400, `Incorrect password`);
     }
 
-    req.session.userId = user.id;
+    req.session.userId = user.id.toString();
     delete user.password;
 
     return res.status(200).json({ success: `Correct password`, user });

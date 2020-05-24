@@ -1,17 +1,30 @@
 import React from "react";
+import profilePic from "../../images/profile-pic.gif";
 
 // STYLES
-import { Wrapper, Text } from "./user.style";
+import {
+  Wrapper,
+  Text,
+  Picture,
+  ProfileWrapper,
+  Button,
+  ButtonWrapper,
+} from "./user.style";
 
 const User = (props) => {
-  const { user, logOut } = props;
+  const { user, action } = props;
   const { id, username } = user;
 
   return (
     <Wrapper>
-      <div>
+      <ProfileWrapper>
+        <Picture src={profilePic} alt="profile" />
         <Text>{`${id} - ${username}`}</Text>
-      </div>
+      </ProfileWrapper>
+      <ButtonWrapper>
+        <Button onClick={() => action("logout")}>LOG OUT</Button>
+        <Button onClick={() => action("delete")}>DELETE</Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 };
