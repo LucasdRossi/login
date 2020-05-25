@@ -4,7 +4,7 @@
 
 ## :tv: Demo
 
-![demo](https://drive.google.com/uc?export=view&id=1K4DLvf8sjCxWY1KOY6MW8H82aHWiJGKp)
+<img src="https://drive.google.com/uc?export=view&id=1K4DLvf8sjCxWY1KOY6MW8H82aHWiJGKp" alt="demo">
 
 ## :rocket: Technologies
 
