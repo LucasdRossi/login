@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import microservice from "./configs/microservice";
-import Cookies from "js-cookie";
 
 // IMAGES
 import Image from "./images/login-image.png";
@@ -17,20 +15,10 @@ const App = () => {
 
   const onLogin = (user) => {
     setUser(user);
-    // Cookies.set("userId", user.id);
   };
 
-  const profileActions = async (action) => {
-    const [status, response] = await microservice(
-      action === "delete" ? action : "get",
-      `/${action}`
-    );
-    if (status === "ok") {
-      setUser(false);
-      // Cookies.remove("userId");
-    } else {
-      handleDropCard(status, response.error);
-    }
+  const onLogout = () => {
+    setUser(false);
   };
 
   const handleDropCard = (type, message) => {
@@ -53,9 +41,9 @@ const App = () => {
           setDropCard={setDropCard}
         />
       )}
-      <Panel>
+      <Panel for={user}>
         {user ? (
-          <User user={user} action={profileActions} />
+          <User user={user} logout={onLogout} />
         ) : (
           <>
             <img src={Image} height="100%" />

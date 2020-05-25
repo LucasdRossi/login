@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 50%;
+  width: ${(props) => (props.for ? "20%" : "50%")};
   height: 600px;
   background-color: #fff !important;
   margin-top: 13vh;

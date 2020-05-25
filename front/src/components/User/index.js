@@ -12,7 +12,7 @@ import {
 } from "./user.style";
 
 const User = (props) => {
-  const { user, action } = props;
+  const { user, logout } = props;
   const { id, username } = user;
 
   return (
@@ -22,8 +22,7 @@ const User = (props) => {
         <Text>{`${id} - ${username}`}</Text>
       </ProfileWrapper>
       <ButtonWrapper>
-        <Button onClick={() => action("logout")}>LOG OUT</Button>
-        <Button onClick={() => action("delete")}>DELETE</Button>
+        <Button onClick={logout}>LOG OUT</Button>
       </ButtonWrapper>
     </Wrapper>
   );
